@@ -6,5 +6,6 @@ else
 fi
 
 FLAGS=$DEBUG
+SRCDIR=src
 
-g++ $FLAGS -std=c++11 -obdf -g -Wall bdf.cpp 
+g++ $FLAGS -std=c++11 -obdf -g -Wall -I$SRCDIR $SRCDIR/bdf.cpp
