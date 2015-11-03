@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <string>
 #include <unordered_map>
 
 #include <unistd.h>
@@ -25,7 +26,7 @@ std::unordered_map<mod_n<CHAR_LEN>,char> codeToChar;
 class bad_program{};
 
 void fill_maps(){
-	char chars[] = {'\0','+','-','>','<','[',']','.',',','*','/','^','v','#','~','!'};
+	char chars[] = {'_','+','-','>','<','[',']','.',',','*','/','^','v','#','~','!'};
 	for(int i = 0;i<CHAR_LEN;++i){
 		charToCode[chars[i]]=i;
 		codeToChar[i]=chars[i];
@@ -39,10 +40,13 @@ std::vector<mod_n<CHAR_LEN>> read_file(char* filename){
 	std::ifstream fin(filename);
 	char c;
 	while(fin>>c){
-		if(charToCode.find(c) == charToCode.end()){
-			program[chars_read++]=0;
-		} else {
+		if(charToCode.find(c) != charToCode.end()){
 			program[chars_read++]=charToCode[c];
+		} else {
+			if(c=='\''){
+				std::string trash;
+				std::getline(fin,trash);
+			}
 		}
 	}
 	return program;
@@ -169,20 +173,20 @@ void run_program(std::vector<mod_n<CHAR_LEN>>& program,std::vector<mod_n<TAPE_LE
 			case('/'):
 				program[prog_pointer]--;
 				break;
-			case('^'):
-				prog_pointer++;
-				break;
-			case('v'):
+			case('^')://move Up in the program
 				prog_pointer--;
+				break;
+			case('v')://move Down in the program
+				prog_pointer++;
 				break;
 			case('#'):
 				quit = true;
 				break;
 			case('~'):
-				dump(program,i_ptr,prog_pointer);
+				dump("Program",program,i_ptr-1,prog_pointer);
 				break;
 			case('!'):
-				dump(memory,pointer);
+				dump("Memory",memory,pointer);
 				break;
 		}
 	}
@@ -205,8 +209,8 @@ int main(int argc, char* argv[]){
 	std::vector<mod_n<CHAR_LEN>> program = read_file(file);
 	std::vector<mod_n<TAPE_LEN>> memory(TAPE_LEN);
 	run_program(program,memory,delay);
-
-	dump(memory,0);
-
+#if DEBUG == 1
+	dump("Memory", memory,0);
+#endif
 	return 0;
 }
