@@ -8,7 +8,9 @@ The second tape contains the loaded program stored as integers % 16 and map to t
 The mappings are as follows
 
 > 00 -> _ `This is a nop`
+
 > 01 -> +	`Increment the selected cell`
+
 > 02 -> - `Decrement the selected cell`
 > 03 -> > `Move the selector right`
 > 04 -> < `Move the selector left`
