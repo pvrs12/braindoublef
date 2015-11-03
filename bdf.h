@@ -12,7 +12,13 @@ void dump(std::vector<mod_n<N>> v,int ptr, int edit_ptr=-1){
 		if(i==ptr){
 			std::cout<<"--->";
 		}
-		std::cout<<"\t"<<i<<"\t"<<v[i]<<"\t"<<codeToChar[v[i]];
+		char c;
+		if(codeToChar.find(v[i])==codeToChar.end()){
+			c=codeToChar[v[i]];
+		} else {
+			c = '\0';
+		}
+		std::cout<<"\t"<<i<<"\t"<<v[i]<<"\t"<<c;
 		if(i==edit_ptr){
 			std::cout<<"  <---";
 		}

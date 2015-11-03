@@ -54,7 +54,14 @@ int find_right(std::vector<mod_n<CHAR_LEN>>& v, mod_n<TAPE_LEN> start){
 
 	int count= 0;
 	while(i != start){
-		char c = codeToChar[v[i++]];
+		char c;
+		if(codeToChar.find(v[i+1])!=codeToChar.end()){
+			c = codeToChar[v[i++]];
+		} else {
+			c = '\0';
+			++i;
+			continue;
+		}
 		if(c=='['){
 			count++;
 		}
@@ -75,7 +82,14 @@ int find_left(std::vector<mod_n<CHAR_LEN>>& v, mod_n<TAPE_LEN> start){
 	
 	int count= 0;
 	while(i != start){
-		char c = codeToChar[v[i--]];
+		char c;
+		if(codeToChar.find(v[i-1])!=codeToChar.end()){
+			c = codeToChar[v[i--]];
+		} else {
+			c = '\0';
+			--i;
+			continue;
+		}		
 		if(c==']'){
 			count++;
 		}
@@ -121,18 +135,25 @@ void run_program(std::vector<mod_n<CHAR_LEN>>& program,std::vector<mod_n<TAPE_LE
 				pointer--;
 				break;
 			case('['):
-				if(!program[pointer]){
+				if(!memory[pointer]){
 					i_ptr = find_right(program,i_ptr);
 #if DEBUG == 1
 					std::cout<<"Jumping forward to "<<i_ptr<<"\t"<<memory[pointer]<<std::endl;
 #endif
 				}
+#if DEBUG == 1
+				else{
+					std::cout<<"Not taking jump\t"<<memory[pointer]<<std::endl;
+				}
+#endif
 				break;
 			case(']'):
-				i_ptr = find_left(program,i_ptr)+1;
+				if(memory[pointer]){
+					i_ptr = find_left(program,i_ptr)+1;
 #if DEBUG == 1
 					std::cout<<"Jumping back to "<<i_ptr<<"\t"<<memory[pointer]<<std::endl;
 #endif
+				}
 				break;
 			case('.'):
 				std::cout<<(char)memory[pointer];
