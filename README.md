@@ -5,7 +5,7 @@ The new operators allow you to modify the loaded BF program so that BF code can 
 
 The second tape contains the loaded program stored as integers % 16 and map to the different operators.
 
-The mappings are as follows
+##Operators
 
 |Numeric Value  | Operator | Description |
 |--------------:|:--------:|-------------|
@@ -25,6 +25,8 @@ The mappings are as follows
 | 13 | # | Halt the program
 | 14 | ~ | Dump the program tape to stdout
 | 15 | ! | Dump the memory tape to stdout
+
+Any character not listed above will be ignored. Anything following on the same line as a ' (single quote) will be ignored.
 
 ##Building
 `./compile.sh [Debug]`

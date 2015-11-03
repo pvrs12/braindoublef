@@ -1,20 +1,24 @@
+'This will echo any chars typed until A is typed
+'then it will quit
+'
+'
 <+
 [
  >
- ,							c = getc                        
+ ,							'c = getc                        
  >++++++++[>++++++++<-]>+   
  [<<->>-]                   
- +                          set flag
+ +                          'set flag
  << 
- [                          if not c = 'A'                      
+ [                          'if not c = 'A'                      
   >++++++++[<++++++++>-]    
-  <+.                         print c
-  [-]                         c= 0
-  >>[-]<<                     unset flag
+  <+.                         'putc(c)
+  [-]                         'c = 0
+  >>[-]<<                     'unset flag
  ]
  >>
- [                          if flag set
-  #                            halt
+ [                          'if flag set
+  #                            'halt
  ]
  <<
  <

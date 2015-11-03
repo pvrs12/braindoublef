@@ -1,8 +1,8 @@
 if [ $# -gt 0 ] 
 then
-	DEBUG=-DDEBUG=0
-else
 	DEBUG=-DDEBUG=1
+else
+	DEBUG=-DDEBUG=0
 fi
 
 FLAGS=$DEBUG
