@@ -28,6 +28,7 @@ The mappings are as follows
 
 ##Building
 `./compile.sh [Debug]`
+
 Use compile.sh to build the program. Providing any parameter for Debug (doesn't matter what it is) will enable debug mode.
 
 ##Running
