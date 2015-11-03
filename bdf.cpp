@@ -124,14 +124,14 @@ void run_program(std::vector<mod_n<CHAR_LEN>>& program,std::vector<mod_n<TAPE_LE
 				if(!program[pointer]){
 					i_ptr = find_right(program,i_ptr);
 #if DEBUG == 1
-					std::cout<<"Jumping forward to "<<i_ptr<<std::endl;
+					std::cout<<"Jumping forward to "<<i_ptr<<"\t"<<memory[pointer]<<std::endl;
 #endif
 				}
 				break;
 			case(']'):
 				i_ptr = find_left(program,i_ptr)+1;
 #if DEBUG == 1
-					std::cout<<"Jumping back to "<<i_ptr<<std::endl;
+					std::cout<<"Jumping back to "<<i_ptr<<"\t"<<memory[pointer]<<std::endl;
 #endif
 				break;
 			case('.'):
